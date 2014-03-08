@@ -1,4 +1,5 @@
 body {
+	font-family: arial;
 	background: rgb(255, 213, 205);
 	margin: 0 auto;
 	padding: 0;
@@ -43,4 +44,85 @@ body {
 	font-weight:bold;
 	border: 2px solid rgb(255, 92, 92);
 	width:50%;
+}
+
+
+
+/*******************************************************************************
+
+										GAME
+
+*******************************************************************************/
+#boardWrapper {
+	display:block;
+	position:relative;
+	box-sizing: border-box;
+	margin:0 auto;
+	width:98%;
+}
+
+#listWrapper {
+	display:block;
+	position:relative;
+	box-sizing:border-box;
+	background-color: white;
+	border:1px solid black;
+	width:20%;
+	float:left;
+}
+
+#answersWrapper {
+	display:block;
+	position:relative;
+	box-sizing:border-box;
+	background-color: white;
+	margin-left:2%;
+	border:1px solid black;
+	width:78%;
+	float:left;
+}
+
+.round {
+	display:block;
+	position:relative;
+	box-sizing:border-box;
+	border-right: 2px solid black;
+	padding: 10px;
+	width:33%;
+	float:left;
+}
+
+.round:last-of-type {
+	border:none;
+}
+
+.answer, .category {
+	display:block;
+	box-sizing:border-box;
+	padding:10px;
+	width:100%;
+	height:60px;
+}
+
+.answerNumber, .categoryNumber {
+	display:inline-block;
+	position:relative;
+	box-sizing:border-box;
+	text-align:right;
+	width:6%;
+}
+
+.answerLine, .categoryTopic {
+	display:inline-block;
+	position:relative;
+	box-sizing:border-box;
+	background:none;
+	padding:5px;
+	border:none;
+	border-bottom:1px solid black;
+	width:92%;
+}
+
+.answerLine:active, .answerLine:focus {
+	outline: none;
 }

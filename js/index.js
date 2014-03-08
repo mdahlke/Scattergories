@@ -4,7 +4,9 @@
  */
 
 $(document).ready(function(){
+	var listNumber;
 	var rb = true; //resize button?
+	
 	$('#btn-pickIt').css({
 		position: 'absolute',
 		left: '0',
@@ -67,7 +69,8 @@ $(document).ready(function(){
 					});
 
 				}
-				d = $.parseJSON( data );
+				var d = $.parseJSON( data );
+				listNumber = d.list;
 				
 				if( nicknameDiv.html() !== d.nickname ){
 					nicknameDiv.animate({
@@ -114,7 +117,12 @@ $(document).ready(function(){
 							listDiv.html(d.list).animate({
 								opacity:1
 							}, {
-								duration: 1000
+								duration: 1000,
+								complete: function(){
+									setTimeout( function(){
+										displaySheet();
+									}, 1000);
+								}
 							});
 						}, 1000);
 					}
@@ -127,5 +135,30 @@ $(document).ready(function(){
 		});
 
 	});
+
+	function displaySheet(){
+		$.ajax({
+			type: 'GET',
+			url: 'inc/showList.inc.php',
+			data: {
+				list: listNumber
+			}
+		}).done(function(data){
+
+			$('#container').html(data);
+
+		});
+	}
+
+	function saveGame(){
+
+		$.ajax({
+			type: 'GET',
+			url: 'inc/saveGame.inc.php',
+			data: {
+
+			}
+		});
+	}
 
 });

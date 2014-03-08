@@ -1,5 +1,5 @@
 <?php
-$con = new mysqli('localhost', 'mdahlke', 'Rpd8749**', 'scattergories');
+require_once( 'db.inc.php' );
 
 if( isset($_GET['getList']) ) {
 	$sql = $con->query('
