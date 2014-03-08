@@ -1,0 +1,46 @@
+body {
+	background: rgb(255, 213, 205);
+	margin: 0 auto;
+	padding: 0;
+	border: 5px solid rgb(236, 99, 55);
+}
+
+#container {
+}
+
+#pickedList {
+	position:relative;
+	padding:20px;
+	font-size:2em;
+}
+
+#nickname {
+	color: #F54949;
+	font-size:1em;
+}
+
+.tab {
+	margin-left:1em;
+}
+
+#listNumber {
+	display:block;
+	color: #808;
+	font-size:4em;
+	text-align: center;
+}
+
+#pickList {
+	text-align:center;
+}
+
+#btn-pickIt {
+	background: rgb(236, 99, 55);
+	margin: 0 auto;
+	padding:50px;
+	color:white;
+	text-align:center;
+	font-weight:bold;
+	border: 2px solid rgb(255, 92, 92);
+	width:50%;
+}
