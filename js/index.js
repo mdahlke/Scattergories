@@ -3,16 +3,61 @@
  * and open the template in the editor.
  */
 
+	function displaySheet(listNumber, code){
+		$.ajax({
+			type: 'GET',
+			url: 'inc/showList.inc.php',
+			data: {
+				list: listNumber,
+				code: code
+			}
+		}).done(function(data){
+
+			$('#container').html(data);
+
+		});
+	}
+
+	function saveGame(r, n, v, p){
+		if( typeof p === 'undefined' ){
+			p = 0;
+		}
+		$.ajax({
+			type: 'GET',
+			url: 'inc/saveGame.inc.php',
+			data: {
+				round: r,
+				number: n,
+				value: v,
+				point: p
+			}
+		}).done(function(d){
+			console.log(d);
+		});
+	}
+
+	function newGame(){
+
+		$.ajax({
+			type: 'GET',
+			url: 'inc/newGame.inc.php'
+		}).done(function(){
+			location.reload();
+		});
+
+	}
+
 $(document).ready(function(){
 	var listNumber;
 	var rb = true; //resize button?
-	
+
+	var pickItHeight = $(window).height() - ($(window).height() * .13);
 	$('#btn-pickIt').css({
 		position: 'absolute',
 		left: '0',
 		bottom: '0',
 		width: $(window).width(),
-		height: $(window).height()
+		height: pickItHeight
 	});
 
 	function fadeDiv( obj ){
@@ -22,8 +67,31 @@ $(document).ready(function(){
 			duration: 1000
 		});
 	}
+
+	$('#joinGame').click(function(){
+
+		$('#container').html('<div><input id="code" /><button id="join">Join Game</button></div>');
+
+	});
+
+	$(document).on('click', '#join', function(){
+		var c = $(this).siblings('#code').val();
+		$.ajax({
+			type: 'GET',
+			url: 'inc/joinGame.inc.php',
+			data: {
+				code: c
+			}
+		}).done(function(data){
+			console.log(data);
+			d = $.parseJSON(data);
+			displaySheet( d.list, d.code );
+		});
+
+	});
 	
 	$('#btn-pickIt').click(function(){
+		$('#joinGame').hide();
 
 		$.ajax({
 			type: 'GET',
@@ -33,6 +101,7 @@ $(document).ready(function(){
 			}
 		}).done(function(data){
 
+		console.log(data);
 			if( $('#pickedList').length === 0 ){
 
 				var nnd = '<span id="nickname"></span>';
@@ -70,7 +139,8 @@ $(document).ready(function(){
 
 				}
 				var d = $.parseJSON( data );
-				listNumber = d.list;
+
+				console.log(d);
 				
 				if( nicknameDiv.html() !== d.nickname ){
 					nicknameDiv.animate({
@@ -120,7 +190,7 @@ $(document).ready(function(){
 								duration: 1000,
 								complete: function(){
 									setTimeout( function(){
-										displaySheet();
+										displaySheet(d.list, d.code);
 									}, 1000);
 								}
 							});
@@ -136,29 +206,34 @@ $(document).ready(function(){
 
 	});
 
-	function displaySheet(){
-		$.ajax({
-			type: 'GET',
-			url: 'inc/showList.inc.php',
-			data: {
-				list: listNumber
-			}
-		}).done(function(data){
+	$(document).on('change', '.answerLine', function(){
+		console.log('hi');
+		var round = $(this).attr('data-round');
+		var number = $(this).attr('data-number');
+		var value = $(this).val();
 
-			$('#container').html(data);
+		saveGame(round, number, value);
+	});
 
-		});
-	}
+	$(document).on('click', '#points', function(){
+		var points = $(this).siblings('.scoreTracker').html() === '' ? 0 : parseInt($(this).siblings('.scoreTracker').html());
+		points++;
+		$(this).siblings('.scoreTracker').html(points);
 
-	function saveGame(){
+		var round = $(this).siblings('.answerLine').attr('data-round');
+		var number = $(this).siblings('.answerLine').attr('data-number');
+		var value = $(this).siblings('.answerLine').val();
+		saveGame(round, number, value, points);
+	});
+	$(document).on('click', '#noPoints', function(){
+		var points = $(this).siblings('.scoreTracker').html() === '' ? 0 : parseInt($(this).siblings('.scoreTracker').html());
+		points--;
+		$(this).siblings('.scoreTracker').html(points);
 
-		$.ajax({
-			type: 'GET',
-			url: 'inc/saveGame.inc.php',
-			data: {
-
-			}
-		});
-	}
+		var round = $(this).siblings('.answerLine').attr('data-round');
+		var number = $(this).siblings('.answerLine').attr('data-number');
+		var value = $(this).siblings('.answerLine').val();
+		saveGame(round, number, value, points);
+	});
 
 });

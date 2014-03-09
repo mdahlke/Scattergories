@@ -3,8 +3,8 @@
 require( 'Game.php' );
 class GameList extends Game {
 
-	function __construct($con, $list) {
-		parent::__construct($con, $list);
+	function __construct($con, $list, $code) {
+		parent::__construct($con, $list, $code);
 	}
 
 	function getList(){
@@ -14,6 +14,7 @@ class GameList extends Game {
 	function showList(){
 		echo '
 			<article id="listWrapper">
+				<h3 class="center">List '.$this->list.'</h3>
 		';
 		$list = $this->con->query('
 			SELECT *

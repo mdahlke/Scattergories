@@ -6,6 +6,19 @@ body {
 	border: 5px solid rgb(236, 99, 55);
 }
 
+.center {
+	text-align:center;
+}
+.strike {
+	text-decoration: line-through;
+}
+.green {
+	color: green;
+}
+.bold {
+	font-weight: bold;
+}
+
 #container {
 }
 
@@ -43,7 +56,11 @@ body {
 	text-align:center;
 	font-weight:bold;
 	border: 2px solid rgb(255, 92, 92);
-	width:50%;
+	width:100%;
+}
+
+#joinGame {
+	border-bottom: 4px solid orange;
 }
 
 
@@ -112,7 +129,11 @@ body {
 	width:6%;
 }
 
-.answerLine, .categoryTopic {
+.answerLine {
+	display:inline;
+}
+
+.answerLine  input, .categoryTopic {
 	display:inline-block;
 	position:relative;
 	box-sizing:border-box;
@@ -123,6 +144,39 @@ body {
 	width:92%;
 }
 
+.scoreTracker {
+	position:absolute;
+	right:80px;
+}
+.score {
+	position:absolute;
+	right: 20px;
+	cursor:pointer;
+}
+.score img {
+	width:15px;
+	height: 15px;
+}
+#noPoints {
+	right: 45px;
+}
+
 .answerLine:active, .answerLine:focus {
 	outline: none;
+}
+
+#gameCode {
+	letter-spacing:2px;
+	font-size:1.8em;
+}
+
+#newGame {
+	position: absolute;
+	right: 100px;
+	background-color:#ac6c6c;
+	padding:15px 25px;
+	color:white;
+	border:2px solid black;
+	border-radius:5px;
+	cursor:pointer;
 }

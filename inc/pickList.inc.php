@@ -1,4 +1,4 @@
-<?php
+<?php session_start();
 require_once( 'db.inc.php' );
 
 if( isset($_GET['getList']) ) {
@@ -41,11 +41,6 @@ if( isset($_GET['getList']) ) {
 
 	$randomList = rand(0, $numberOfPossibleLists - 1);
 	$list = $lists[$randomList]['id'];
-	//echo '<pre>';
-	//var_dump($max);
-	//var_dump($list[$randomList]);
-	//echo '</pre>';
-
 	$con->query('
 		UPDATE list
 		SET timesPlayed = timesPlayed + 1
@@ -54,6 +49,16 @@ if( isset($_GET['getList']) ) {
 
 //	$con->query('
 //		UPDATE list SET timesPlayed = 0');
+	$seed = str_split('abcdefghjkmnopqrstuvwxyz'
+                 .'ABCDEFGHJKMNOPQRSTUVWXYZ'
+				 .'1234567890');
+	$code = '';
+	foreach (array_rand($seed, 5) as $k) $code .= $seed[$k];
+	
+	$con->query('
+		INSERT INTO game(listID, code)
+		VALUES ("'.$list.'", "'.$code.'")
+	');
 
 	mysqli_close( $con );
 
@@ -66,11 +71,13 @@ if( isset($_GET['getList']) ) {
 	$nickname = $nicknames[rand( 0, $nn )];
 
 	if( rand(0, 1000) > 999 ){
-		$return = json_encode( array('nickname' => $nickname, 'list' => 'YOU!', 'filler' => 'I choose:') );
+		$return = json_encode( array('nickname' => $nickname, 'list' => 'YOU!', 'filler' => 'I choose:', 'code' => $code) );
 	}
 	else {
-		$return = json_encode( array('nickname' => $nickname, 'list' => $list, 'filler' => 'I choose list:') );
+		$return = json_encode( array('nickname' => $nickname, 'list' => $list, 'filler' => 'I choose list:', 'code' => $code) );
 	}
+	$_SESSION['list'] = $list;
+	$_SESSION['code'] = $code;
 	echo $return;
 }
 
