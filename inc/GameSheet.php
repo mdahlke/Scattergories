@@ -28,6 +28,7 @@ class GameSheet extends GameList {
 						$class = '';
 						$points = '';
 					}
+					var_dump($points);
 					echo '
 						<div class="answer">
 							<span class="answerNumber">'.$a.')</span>

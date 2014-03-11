@@ -227,13 +227,15 @@ $(document).ready(function(){
 	});
 	$(document).on('click', '#noPoints', function(){
 		var points = $(this).siblings('.scoreTracker').html() === '' ? 0 : parseInt($(this).siblings('.scoreTracker').html());
-		points--;
-		$(this).siblings('.scoreTracker').html(points);
+		if( points > 0){
+			points--;
+			$(this).siblings('.scoreTracker').html(points);
 
-		var round = $(this).siblings('.answerLine').attr('data-round');
-		var number = $(this).siblings('.answerLine').attr('data-number');
-		var value = $(this).siblings('.answerLine').val();
-		saveGame(round, number, value, points);
+			var round = $(this).siblings('.answerLine').attr('data-round');
+			var number = $(this).siblings('.answerLine').attr('data-number');
+			var value = $(this).siblings('.answerLine').val();
+			saveGame(round, number, value, points);
+		}
 	});
 
 });
