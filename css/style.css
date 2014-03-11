@@ -1,9 +1,11 @@
 body {
+	position: relative;
 	font-family: arial;
 	background: rgb(255, 213, 205);
 	margin: 0 auto;
 	padding: 0;
 	border: 5px solid rgb(236, 99, 55);
+	min-width: 1300px;
 }
 
 .center {
@@ -20,6 +22,8 @@ body {
 }
 
 #container {
+	position:relative;
+	max-width:1700px;
 }
 
 #pickedList {
@@ -115,6 +119,7 @@ body {
 
 .answer, .category {
 	display:block;
+	position:relative;
 	box-sizing:border-box;
 	padding:10px;
 	width:100%;
@@ -146,10 +151,12 @@ body {
 
 .scoreTracker {
 	position:absolute;
+	top:15px;
 	right:80px;
 }
 .score {
 	position:absolute;
+	top:15px;
 	right: 20px;
 	cursor:pointer;
 }
