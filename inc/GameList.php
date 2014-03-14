@@ -12,26 +12,27 @@ class GameList extends Game {
 	}
 
 	function showList(){
-		echo '
+		$list = '
 			<article id="listWrapper">
 				<h3 class="center">List '.$this->list.'</h3>
 		';
-		$list = $this->con->query('
+		$getList = $this->con->query('
 			SELECT *
 			FROM list
 			WHERE id = "'.$this->list.'"
 		')->fetch_assoc();
 		for($i = 1; $i <= Game::NUMBEROFANSWERS; $i++){
-			echo '
+			$list .= '
 				<div class="category">
 					<span class="categoryNumber">'.$i.')</span>
-					<span class="categoryTopic">'.$list[$i].'</span>
+					<span class="categoryTopic">'.$getList[$i].'</span>
 				</div>
 			';
 		}
-		echo '
+		$list .= '
 			</article>
 		';
+		return $list;
 
 	}
 

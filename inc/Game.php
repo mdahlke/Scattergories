@@ -18,5 +18,30 @@ class Game {
 		echo $this->code;
 	}
 
+	function gameBoard( $list, $sheet ){
+		echo '
+			<section id="boardWrapper">
+		';
+		echo $list;
+		echo $sheet;
+		echo '
+			<article id="newGameWrapper">
+
+				<p>
+					<span class="bold">Game Code: </span>
+					<span id="gameCode">'.$_SESSION['code'].'</span>
+				</p>
+				<p>
+					<span id="newGame" class="scat-btn" onclick="javascript: newGame();">New Game</span>
+					<span id="startTimer" class="scat-btn">Start Timer</span>
+				</p>
+			</article>
+		</section>
+	';
+
+
+
+	}
+
 }
 ?>

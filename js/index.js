@@ -238,4 +238,47 @@ $(document).ready(function(){
 		}
 	});
 
+
+	/**
+	 * Start game timer
+	 */
+	$(document).on('click', '#startTimer', function(){
+		var limit = ( 60 * 1 ); // 3minutes
+		var time = 0;
+		var sound = document.createElement('audio');
+		var soundFaster = document.createElement('audio');
+		var fast = false;
+		var faster = false;
+		var fastest = false;
+		sound.setAttribute('src', 'audio/button-20.mp3');
+		sound.volume = 0.4;
+		soundFaster.setAttribute('src', 'audio/button-20.mp3');
+		soundFaster.volume = 0.4;
+		$.get();
+		
+		sound.play();
+		var buzz = setInterval(function(){
+			sound.play();
+		}, 50);
+
+		var timer = setInterval(function(){
+			time++;
+			console.log(time);
+
+			if( time >= 10 ){
+				clearInterval( buzz );
+				sound.remove();
+				var buzz = setInterval(function(){
+					soundFaster.play();
+				}, 10);
+			}
+			if( time >= limit ){
+				clearInterval( timer );
+				clearInterval( buzz );
+				alert( 'Times up!' );
+			}
+		}, 1000 );
+
+	});
+
 });
