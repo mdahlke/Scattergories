@@ -47,6 +47,13 @@ function newGame(){
 
 }
 
+var dieLetters = 'abcdefghijklmnoprst';
+var die = dieLetters.split("");
+
+function rollDie(){
+    return die[Math.floor(Math.random() * die.length)];
+}
+
 $(document).ready(function(){
 	var listNumber;
 	var rb = true; //resize button?
@@ -251,6 +258,19 @@ $(document).ready(function(){
 			saveGame(round, number, value, points);
 		}
 	});
+        $(this).on('click', '#rollDice', function(){
+            $('#diceRollResult').fadeIn();
+            var time = 0;
+            var rolling = setInterval(function(){
+            var letter = rollDie();
+                $('#diceRollResult').text(letter);
+                if(time >= 25) {
+                    clearInterval(rolling);
+                }
+                time++;
+            }, 150);
+        });
+
 
 
 	/**

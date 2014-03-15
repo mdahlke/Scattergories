@@ -1,242 +1,267 @@
 body {
-	position: relative;
-	font-family: arial;
-	background: rgb(255, 213, 205);
-	margin: 0 auto;
-	padding: 0;
-	border: 5px solid rgb(236, 99, 55);
-	min-width: 1300px;
+    position: relative;
+    font-family: arial;
+    background: rgb(255, 213, 205);
+    margin: 0 auto;
+    padding: 0;
+    border: 5px solid rgb(236, 99, 55);
+    min-width: 1300px;
 }
 
 .scat-btn {
-	background-color:#ac6c6c;
-	padding:15px 25px;
-	color:white;
-	border:2px solid black;
-	border-radius:5px;
-	cursor:pointer;
+    background-color:#ac6c6c;
+    padding:15px 25px;
+    color:white;
+    border:2px solid black;
+    border-radius:5px;
+    cursor:pointer;
 }
 
 .center {
-	text-align:center;
+    text-align:center;
 }
 .strike {
-	text-decoration: line-through;
+    text-decoration: line-through;
 }
 .green {
-	color: green;
+    color: green;
 }
 .bold {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 #container {
-	position:relative;
-	width:100%;
+    position:relative;
+    width:100%;
 }
 
 #pickedList {
-	position:relative;
-	padding:20px;
-	font-size:2em;
+    position:relative;
+    padding:20px;
+    font-size:2em;
 }
 
 #nickname {
-	color: #F54949;
-	font-size:1em;
+    color: #F54949;
+    font-size:1em;
 }
 
 .tab {
-	margin-left:1em;
+    margin-left:1em;
 }
 
 #listNumber {
-	display:block;
-	color: #808;
-	font-size:4em;
-	text-align: center;
+    display:block;
+    color: #808;
+    font-size:4em;
+    text-align: center;
 }
 
 .selectGame {
-	position:relative;
-	left:0px;
-	margin:0px;
-	width:100%;
+    position:relative;
+    left:0px;
+    margin:0px;
+    width:100%;
 }
 
 #createGame {
-	text-align:center;
+    text-align:center;
 }
 #createGame .btn-pickIt {
-	position:absolute;
-	top:0px;
-	left:0px;
+    position:absolute;
+    top:0px;
+    left:0px;
 }
 
 .btn-pickIt {
-	background: rgb(236, 99, 55);
-	margin: 0 auto;
-	padding:50px;
-	color:white;
-	text-align:center;
-	font-weight:bold;
-	border: 2px solid rgb(255, 92, 92);
-	width:100%;
-	height:100%;
+    background: rgb(236, 99, 55);
+    margin: 0 auto;
+    padding:50px;
+    color:white;
+    text-align:center;
+    font-weight:bold;
+    border: 2px solid rgb(255, 92, 92);
+    width:100%;
+    height:100%;
 }
 
 #joinGame {
-	border-bottom: 4px solid orange;
+    border-bottom: 4px solid orange;
 }
 
 #enterGameCodeWrapper {
-	position:relative;
-	text-align:center;
-	height:100%;
+    position:relative;
+    text-align:center;
+    height:100%;
 }
 
 #gameCode {
-	position:relative;
-	margin: 0 auto;
-	top:30%;
+    position:relative;
+    margin: 0 auto;
+    top:30%;
 }
 
 #code {
-	display: block;
-	margin: 0 auto;
-	padding: 40px 20px;
-	text-align: center;
-	font-size: 80px;
-	width: 20%;
+    display: block;
+    margin: 0 auto;
+    padding: 40px 20px;
+    text-align: center;
+    font-size: 80px;
+    width: 20%;
 }
 
 #joinButton {
-	position:relative;
-	margin-top:30px;
-	padding:40px 80px;
+    position:relative;
+    margin-top:30px;
+    padding:40px 80px;
 }
 
 
 
 /*******************************************************************************
 
-										GAME
+                                                                                GAME
 
 *******************************************************************************/
 #boardWrapper {
-	display:block;
-	position:relative;
-	box-sizing: border-box;
-	margin:0 auto;
-	width:98%;
+    display:block;
+    position:relative;
+    box-sizing: border-box;
+    margin:0 auto;
+    width:98%;
 }
 
 #listWrapper {
-	display:block;
-	position:relative;
-	box-sizing:border-box;
-	background-color: white;
-	border:1px solid black;
-	width:20%;
-	float:left;
+    display:block;
+    position:relative;
+    box-sizing:border-box;
+    background-color: white;
+    border:1px solid black;
+    width:20%;
+    float:left;
 }
 
 #answersWrapper {
-	display:block;
-	position:relative;
-	box-sizing:border-box;
-	background-color: white;
-	margin-left:2%;
-	border:1px solid black;
-	width:78%;
-	float:left;
+    display:block;
+    position:relative;
+    box-sizing:border-box;
+    background-color: white;
+    margin-left:2%;
+    border:1px solid black;
+    width:78%;
+    float:left;
 }
 
 .round {
-	display:block;
-	position:relative;
-	box-sizing:border-box;
-	border-right: 2px solid black;
-	padding: 10px;
-	width:33%;
-	float:left;
+    display:block;
+    position:relative;
+    box-sizing:border-box;
+    border-right: 2px solid black;
+    padding: 10px;
+    width:33%;
+    float:left;
 }
 
 .round:last-of-type {
-	border:none;
+    border:none;
 }
 
 .answer, .category {
-	display:block;
-	position:relative;
-	box-sizing:border-box;
-	padding:10px;
-	width:100%;
-	height:60px;
+    display:block;
+    position:relative;
+    box-sizing:border-box;
+    padding:10px;
+    width:100%;
+    height:60px;
 }
 
 .answerNumber, .categoryNumber {
-	display:inline-block;
-	position:relative;
-	box-sizing:border-box;
-	text-align:right;
-	width:6%;
+    display:inline-block;
+    position:relative;
+    box-sizing:border-box;
+    text-align:right;
+    width:6%;
 }
 
 .answerLine {
-	display:inline;
+    display:inline;
 }
 
 .answerLine  input, .categoryTopic {
-	display:inline-block;
-	position:relative;
-	box-sizing:border-box;
-	background:none;
-	padding:5px;
-	border:none;
-	border-bottom:1px solid black;
-	width:92%;
+    display:inline-block;
+    position:relative;
+    box-sizing:border-box;
+    background:none;
+    padding:5px;
+    border:none;
+    border-bottom:1px solid black;
+    width:92%;
 }
 
 .scoreTracker {
-	position:absolute;
-	top:15px;
-	right:80px;
+    position:absolute;
+    top:15px;
+    right:80px;
 }
 .score {
-	position:absolute;
-	top:15px;
-	right: 20px;
-	cursor:pointer;
+    position:absolute;
+    top:15px;
+    right: 20px;
+    cursor:pointer;
 }
 .score img {
-	width:15px;
-	height: 15px;
+    width:15px;
+    height: 15px;
 }
 #noPoints {
-	right: 45px;
+    right: 45px;
 }
 
 .answerLine:active, .answerLine:focus {
-	outline: none;
+    outline: none;
+}
+
+
+#gameFunctions {
+    position:relative;
+    left:10px;
 }
 
 #gameCode {
-	letter-spacing:2px;
-	font-size:1.8em;
+    position:relative;
+    letter-spacing:2px;
+    font-size:1.8em;
 }
 
 #newGameWrapper {
-	position:relative;
-	clear:both;
+    position:relative;
+    top:50px;
+    clear:both;
 }
 
 #newGame {
-	position: absolute;
-	right: 100px;
+    position: absolute;
+    right: 100px;
 }
 
 #startTimer {
-	position:absolute;
-	left: 370px;
+    position:relative;
+    margin-left:120px;
+}
+
+#rollDice {
+    position:relative;
+}
+
+#diceRollResult {
+    display:inline-block;
+    background-color: white;
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 3px solid black;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align:center;
+    width:15px;
 }

@@ -27,20 +27,17 @@ class Game {
 		echo '
 			<article id="newGameWrapper">
 
-				<p>
+				<div id="gameFunctions">
 					<span class="bold">Game Code: </span>
 					<span id="gameCode">'.$_SESSION['code'].'</span>
-				</p>
-				<p>
 					<span id="newGame" class="scat-btn" onclick="javascript: newGame();">New Game</span>
 					<span id="startTimer" class="scat-btn">Start Timer</span>
-				</p>
+					<span id="rollDice" class="scat-btn">Roll Die</span>
+					<span id="diceRollResult" style="display:none;"></span>
+				</div>
 			</article>
 		</section>
 	';
-
-
-
 	}
 
 }
