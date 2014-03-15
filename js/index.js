@@ -3,61 +3,71 @@
  * and open the template in the editor.
  */
 
-	function displaySheet(listNumber, code){
-		$.ajax({
-			type: 'GET',
-			url: 'inc/showList.inc.php',
-			data: {
-				list: listNumber,
-				code: code
-			}
-		}).done(function(data){
-
-			$('#container').html(data);
-
-		});
-	}
-
-	function saveGame(r, n, v, p){
-		if( typeof p === 'undefined' ){
-			p = 0;
+function displaySheet(listNumber, code){
+	$.ajax({
+		type: 'GET',
+		url: 'inc/showList.inc.php',
+		data: {
+			list: listNumber,
+			code: code
 		}
-		$.ajax({
-			type: 'GET',
-			url: 'inc/saveGame.inc.php',
-			data: {
-				round: r,
-				number: n,
-				value: v,
-				point: p
-			}
-		}).done(function(d){
-			console.log(d);
-		});
+	}).done(function(data){
+
+		$('#container').html(data);
+
+	});
+}
+
+function saveGame(r, n, v, p){
+	if( typeof p === 'undefined' ){
+		p = 'none';
 	}
+	$.ajax({
+		type: 'GET',
+		url: 'inc/saveGame.inc.php',
+		data: {
+			round: r,
+			number: n,
+			value: v,
+			point: p
+		}
+	}).done(function(d){
+		console.log(d);
+	});
+}
 
-	function newGame(){
+function newGame(){
 
-		$.ajax({
-			type: 'GET',
-			url: 'inc/newGame.inc.php'
-		}).done(function(){
-			location.reload();
-		});
+	$.ajax({
+		type: 'GET',
+		url: 'inc/newGame.inc.php'
+	}).done(function(){
+		location.reload();
+	});
 
-	}
+}
 
 $(document).ready(function(){
 	var listNumber;
 	var rb = true; //resize button?
+	var windowHeight = $(window).height();
+	var windowWidth = $(window).width();
+	var createGameDiv = $('#createGame');
+	var createGameButton = $('#createGame').children('.btn-pickIt');
+	var createGameHeight = windowHeight - (windowHeight * .13);
+	var joinGameDiv = $('#joinGame');
+	var joinGameButton = $('#joinGame').children('.btn-pickIt');
+	var joinGameHeight = windowHeight - createGameHeight;
 
-	var pickItHeight = $(window).height() - ($(window).height() * .13);
-	$('#btn-pickIt').css({
-		position: 'absolute',
-		left: '0',
-		bottom: '0',
-		width: $(window).width(),
-		height: pickItHeight
+	$(createGameDiv).css({
+		height: createGameHeight
+	});
+	$(createGameButton).css({
+	});
+	$(joinGameDiv).css({
+		height: joinGameHeight
+	});
+	$(joinGameButton).css({
 	});
 
 	function fadeDiv( obj ){
@@ -70,7 +80,7 @@ $(document).ready(function(){
 
 	$('#joinGame').click(function(){
 
-		$('#container').html('<div><input id="code" /><button id="join">Join Game</button></div>');
+		$('#container').html('<div id="enterGameCodeWrapper"><div id="gameCode"><h2>Enter Game Code:</h2><input id="code" /><button id="joinButton" class="scat-btn">Join Game</button></div></div>');
 
 	});
 
@@ -90,7 +100,7 @@ $(document).ready(function(){
 
 	});
 	
-	$('#btn-pickIt').click(function(){
+	$('#createGame').click(function(){
 		$('#joinGame').hide();
 
 		$.ajax({
@@ -101,7 +111,7 @@ $(document).ready(function(){
 			}
 		}).done(function(data){
 
-		console.log(data);
+			console.log(data);
 			if( $('#pickedList').length === 0 ){
 
 				var nnd = '<span id="nickname"></span>';
@@ -130,7 +140,8 @@ $(document).ready(function(){
 
 			try {
 				if( rb ){
-					$('#btn-pickIt').css({}).animate({
+					$('#createGame').css({}).animate({
+						bottom: '0px',
 						padding: '50px',
 						height: ''
 					}, {
@@ -206,7 +217,7 @@ $(document).ready(function(){
 
 	});
 
-	$(document).on('change', '.answerLine', function(){
+	$(this).on('change', '.answerLine', function(){
 		console.log('hi');
 		var round = $(this).attr('data-round');
 		var number = $(this).attr('data-number');
@@ -215,7 +226,7 @@ $(document).ready(function(){
 		saveGame(round, number, value);
 	});
 
-	$(document).on('click', '#points', function(){
+	$(this).on('click', '#points', function(){
 		var points = $(this).siblings('.scoreTracker').html() === '' ? 0 : parseInt($(this).siblings('.scoreTracker').html());
 		points++;
 		$(this).siblings('.scoreTracker').html(points);
@@ -225,10 +236,13 @@ $(document).ready(function(){
 		var value = $(this).siblings('.answerLine').val();
 		saveGame(round, number, value, points);
 	});
-	$(document).on('click', '#noPoints', function(){
-		var points = $(this).siblings('.scoreTracker').html() === '' ? 0 : parseInt($(this).siblings('.scoreTracker').html());
+	$(this).on('click', '#noPoints', function(){
+		var previousPoints = $(this).siblings('.scoreTracker').html();
+		var points = previousPoints === '' ? 0 : parseInt($(this).siblings('.scoreTracker').html());
 		if( points > 0){
 			points--;
+		}
+		if( previousPoints !== points ){
 			$(this).siblings('.scoreTracker').html(points);
 
 			var round = $(this).siblings('.answerLine').attr('data-round');
@@ -242,43 +256,46 @@ $(document).ready(function(){
 	/**
 	 * Start game timer
 	 */
-	$(document).on('click', '#startTimer', function(){
-		var limit = ( 60 * 1 ); // 3minutes
+
+	$(this).on('click', '#startTimer', function(){
+		var limit = ( 10 * 1 ); // 3minutes
 		var time = 0;
+		var buzzer;
+		var timer;
 		var sound = document.createElement('audio');
-		var soundFaster = document.createElement('audio');
-		var fast = false;
-		var faster = false;
-		var fastest = false;
+		var gameOver = false;
 		sound.setAttribute('src', 'audio/button-20.mp3');
 		sound.volume = 0.4;
-		soundFaster.setAttribute('src', 'audio/button-20.mp3');
-		soundFaster.volume = 0.4;
 		$.get();
 		
 		sound.play();
-		var buzz = setInterval(function(){
-			sound.play();
-		}, 50);
 
-		var timer = setInterval(function(){
+		function playSound(rate){
+			clearInterval( buzzer );
+			buzzer = setInterval(function(){
+				sound.play();
+			}, rate);
+			buzzer;
+		}
+
+		timer = setInterval(function(){
 			time++;
 			console.log(time);
-
-			if( time >= 10 ){
-				clearInterval( buzz );
-				sound.remove();
-				var buzz = setInterval(function(){
-					soundFaster.play();
-				}, 10);
+			sound.play();
+			if( time >= 5 && !gameOver ){
+				sound.pause();
+				playSound(50);
 			}
-			if( time >= limit ){
+			if( time >= limit && !gameOver ){
 				clearInterval( timer );
-				clearInterval( buzz );
+				clearInterval( buzzer );
+				sound.src='';
+				gameOver = true;
 				alert( 'Times up!' );
 			}
-		}, 1000 );
+		}, 1000 )();
 
+		playSound(100);
 	});
 
 });

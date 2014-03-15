@@ -13,11 +13,11 @@
 	<body>
 		
 		<section id="container">
-			<article id="pickList">
-				<button id="btn-pickIt" type='button'>Pick it</button>
+			<article id="joinGame" class="selectGame">
+				<button class="btn-pickIt" type='button'>Join A Game</button>
 			</article>
-			<article id="joinGame">
-				<button id="btn-pickIt" type='button'>Join A Game</button>
+			<article id="createGame" class="selectGame">
+				<button class="btn-pickIt" type='button'>Pick it</button>
 			</article>
 		</section>
 		
