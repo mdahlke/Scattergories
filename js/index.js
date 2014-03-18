@@ -91,7 +91,7 @@ $(document).ready(function(){
 
 	});
 
-	$(document).on('click', '#join', function(){
+	$(document).on('click', '#joinButton', function(){
 		var c = $(this).siblings('#code').val();
 		$.ajax({
 			type: 'GET',
@@ -237,6 +237,10 @@ $(document).ready(function(){
 		var points = $(this).siblings('.scoreTracker').html() === '' ? 0 : parseInt($(this).siblings('.scoreTracker').html());
 		points++;
 		$(this).siblings('.scoreTracker').html(points);
+               
+                if( points > 0 ){
+                    $(this).siblings('.answerLine').removeClass('strike');
+                }
 
 		var round = $(this).siblings('.answerLine').attr('data-round');
 		var number = $(this).siblings('.answerLine').attr('data-number');
@@ -249,6 +253,9 @@ $(document).ready(function(){
 		if( points > 0){
 			points--;
 		}
+                if( points === 0 ){
+                    $(this).siblings('.answerLine').addClass('strike');
+                }
 		if( previousPoints !== points ){
 			$(this).siblings('.scoreTracker').html(points);
 
@@ -278,7 +285,7 @@ $(document).ready(function(){
 	 */
 
 	$(this).on('click', '#startTimer', function(){
-		var limit = ( 10 * 1 ); // 3minutes
+		var limit = ( 150 ); // 3minutes
 		var time = 0;
 		var buzzer;
 		var timer;
@@ -302,7 +309,7 @@ $(document).ready(function(){
 			time++;
 			console.log(time);
 			sound.play();
-			if( time >= 5 && !gameOver ){
+			if( time >= 135 && !gameOver ){
 				sound.pause();
 				playSound(50);
 			}
@@ -317,5 +324,17 @@ $(document).ready(function(){
 
 		playSound(100);
 	});
+        
+        $(document).on('click', '#showTotal', function(){
+            var thisScore;
+            var score = 0;
+            $('.scoreTracker').each( function(){
+                thisScore = parseInt( $(this).text() );
+                if( !isNaN( thisScore ) ){
+                    score += thisScore;
+                }
+            });
+            alert( score );
+        });
 
 });

@@ -25,15 +25,19 @@ class Game {
 		echo $list;
 		echo $sheet;
 		echo '
-			<article id="newGameWrapper">
-
-				<div id="gameFunctions">
+			<article id="gameFunctions">
+				<div id="gameCodeWrapper">
 					<span class="bold">Game Code: </span>
 					<span id="gameCode">'.$_SESSION['code'].'</span>
-					<span id="newGame" class="scat-btn" onclick="javascript: newGame();">New Game</span>
+				</div>
+				<div id="currentGameFunctions">
 					<span id="startTimer" class="scat-btn">Start Timer</span>
 					<span id="rollDice" class="scat-btn">Roll Die</span>
 					<span id="diceRollResult" style="display:none;"></span>
+					<span id="showTotal" class="scat-btn">Show Total</span>
+				</div>
+				<div id="newGameFunctions">
+					<span id="newGame" class="scat-btn" onclick="javascript: newGame();">New Game</span>
 				</div>
 			</article>
 		</section>
