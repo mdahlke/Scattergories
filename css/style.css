@@ -135,11 +135,10 @@ body {
 
 #listWrapper {
     display:block;
-    position:fixed;
+    position:relative;
     box-sizing:border-box;
     background-color: white;
     border:1px solid black;
-    min-width:270px;
     width:20%;
     float:left;
 }
@@ -149,7 +148,7 @@ body {
     position:relative;
     box-sizing:border-box;
     background-color: white;
-    margin-left:22%;
+    margin-left:2%;
     border:1px solid black;
     width:78%;
     float:left;
