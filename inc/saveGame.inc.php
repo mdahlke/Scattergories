@@ -32,7 +32,6 @@ if( isset($_GET['point']) ){
 		$point = 0;
 	}
 	$_SESSION['game'][$round][$number]['points'] = $point;
-	var_dump($point);
 
 }
 else {

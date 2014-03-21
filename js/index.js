@@ -15,6 +15,19 @@ function displaySheet(listNumber, code){
 
 		$('#container').html(data);
 
+		var coverHeight = $('#answersWrapper').height() + 10;
+		var coverText = $( '<div />', {
+			id: 'coverText'
+		}).text('Scattergories!');
+		var cover = $( '<div />', {
+			id: 'cover'
+		}).css({
+			width: $(window).width(),
+			height: coverHeight
+		}).append( coverText );
+		$('body').append( cover );
+
+
 	});
 }
 
@@ -118,7 +131,6 @@ $(document).ready(function(){
 			}
 		}).done(function(data){
 
-			console.log(data);
 			if( $('#pickedList').length === 0 ){
 
 				var nnd = '<span id="nickname"></span>';
@@ -148,9 +160,7 @@ $(document).ready(function(){
 			try {
 				if( rb ){
 					$('#createGame').css({}).animate({
-						bottom: '0px',
-						padding: '50px',
-						height: ''
+						top: $(window).height()
 					}, {
 						duration: 2000
 					});
@@ -265,37 +275,78 @@ $(document).ready(function(){
 			saveGame(round, number, value, points);
 		}
 	});
-        $(this).on('click', '#rollDice', function(){
-            $('#diceRollResult').fadeIn();
-            var time = 0;
-            var rolling = setInterval(function(){
-            var letter = rollDie();
-                $('#diceRollResult').text(letter);
-                if(time >= 25) {
-                    clearInterval(rolling);
-                }
-                time++;
-            }, 150);
-        });
+	$(this).on('click', '#rollDice', function(){
+		$('#diceRollResult').fadeIn();
+		var time = 0;
+		var rolling = setInterval(function(){
+		var letter = rollDie();
+			$('#diceRollResult').text(letter);
+			if(time >= 25) {
+				clearInterval(rolling);
+			}
+			time++;
+		}, 150);
+	});
 
+	$(document).on('click', '#tallyScore', function(){
+		$( '#cover' ).toggle(); // slides cover up
+	});
 
+	function roundStatus( status ){
+		
+		status = typeof status === 'undefined' ? 'end' : status;
+
+		if( status === 'start' ){
+			$('#cover').slideUp(500);
+		}
+		else {
+			$('#cover').slideDown(500);
+			$('#diceRollResult').hide();
+		}
+
+	}
+
+	function tallyScore(){
+		$('#cover').slideUp(500);
+	}
 
 	/**
 	 * Start game timer
 	 */
-
 	$(this).on('click', '#startTimer', function(){
-		var limit = ( 150 ); // 3minutes
+
+		if( $('#diceRollResult').css('display') === 'none' ){
+			highlightContainer( $('#rollDice') );
+			return;
+		}
+		
+		var limit = ( 150 ); // 150
 		var time = 0;
 		var buzzer;
 		var timer;
-		var sound = document.createElement('audio');
 		var gameOver = false;
-		sound.setAttribute('src', 'audio/button-20.mp3');
-		sound.volume = 0.4;
-		$.get();
 		
-		sound.play();
+		var sound = document.createElement('audio');
+		sound.setAttribute('src', 'audio/button-20.mp3');
+		sound.volume = 0.7;
+		var endGameSound = document.createElement('audio');
+		endGameSound.setAttribute('src', 'audio/buzzer.mp3');
+		endGameSound.volume = 1;
+
+		$.get();
+
+		$.ajax({
+			type: 'GET',
+			url: 'inc/changeRoundStatus.inc.php',
+			data: {
+				status: 'start',
+				gameCode: $('#gameCode').text(),
+				refer: 'index'
+			}
+		}).done(function(data){
+			roundStatus( 'start' );
+			sound.play();
+		});	
 
 		function playSound(rate){
 			clearInterval( buzzer );
@@ -307,7 +358,6 @@ $(document).ready(function(){
 
 		timer = setInterval(function(){
 			time++;
-			console.log(time);
 			sound.play();
 			if( time >= 135 && !gameOver ){
 				sound.pause();
@@ -317,24 +367,62 @@ $(document).ready(function(){
 				clearInterval( timer );
 				clearInterval( buzzer );
 				sound.src='';
-				gameOver = true;
-				alert( 'Times up!' );
+
+				$.ajax({
+					type: 'GET',
+					url: 'inc/changeRoundStatus.inc.php',
+					data: {
+						status: 'end',
+						gameCode: $('#gameCode').text(),
+						refer: 'index'
+					}
+				}).done(function(){
+					endGameSound.play();
+					gameOver = true;
+					roundStatus( 'end' );
+				});
+
 			}
-		}, 1000 )();
+		}, 1000 );
 
 		playSound(100);
 	});
+
+	function highlightContainer( obj ){
+		console.log($(obj));
+		var oc = {
+			background: $(obj).css('background'),
+			color: $(obj).css('color')
+		};
+		var hc = {
+			background: 'rgb(255, 255, 113)',
+			color: 'black'
+		};
+		var i = 0;
+		
+		var highlight = setInterval( function(){
+			var c = i % 2 ? oc : hc;
+			console.log( c );
+			$(obj).css(c);
+			i++;
+		}, 200);
+		
+		setTimeout( function(){
+			clearInterval( highlight );
+		}, 1000);
+
+	}
         
-        $(document).on('click', '#showTotal', function(){
-            var thisScore;
-            var score = 0;
-            $('.scoreTracker').each( function(){
-                thisScore = parseInt( $(this).text() );
-                if( !isNaN( thisScore ) ){
-                    score += thisScore;
-                }
-            });
-            alert( score );
-        });
+	$(document).on('click', '#showTotal', function(){
+		var thisScore;
+		var score = 0;
+		$('.scoreTracker').each( function(){
+			thisScore = parseInt( $(this).text() );
+			if( !isNaN( thisScore ) ){
+				score += thisScore;
+			}
+		});
+		alert( score );
+	});
 
 });

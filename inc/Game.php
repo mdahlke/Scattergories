@@ -35,6 +35,7 @@ class Game {
 					<span id="rollDice" class="scat-btn">Roll Die</span>
 					<span id="diceRollResult" style="display:none;"></span>
 					<span id="showTotal" class="scat-btn">Show Total</span>
+					<span id="tallyScore" class="scat-btn">Tally Score</span>
 				</div>
 				<div id="newGameFunctions">
 					<span id="newGame" class="scat-btn" onclick="javascript: newGame();">New Game</span>

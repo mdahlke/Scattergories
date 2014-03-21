@@ -133,6 +133,28 @@ body {
     width:98%;
 }
 
+#cover {
+	position:absolute;
+	top:0;
+	left:0;
+	background-color: darkred;
+	border-bottom:3px solid lightcoral;
+	border-left: 2px solid black;
+	border-right: 2px solid black;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	text-align:center;
+	z-index:99999;
+}
+
+#cover #coverText {
+	position:relative;;
+	top:45%;
+	margin:0 auto;
+	font-size:60px;
+	color:white;
+}
+
 #listWrapper {
     display:block;
     position:relative;
