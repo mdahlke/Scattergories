@@ -27,8 +27,9 @@ function displaySheet(listNumber, code){
 		}).append( coverText );
 		$('body').append( cover );
 
-
 	});
+
+//	longPoll();
 }
 
 function saveGame(r, n, v, p){
@@ -426,3 +427,53 @@ $(document).ready(function(){
 	});
 
 });
+
+
+
+//function longPoll( status ){
+//	var timestamp = new Date().getTime();
+//	(function startConnection() {
+//		$.ajax({
+//			type: 'get',
+//			url: 'inc/checkRoundStatus.inc.php',
+//			async: true,
+//			cache: false,
+//			dataType: 'json',
+//			data: {
+//				gameCode: $('#gameCode').text(),
+//				refer: 'index'
+//			},
+//			success: function(data){
+//				console.log(data);
+//				if( data.inProgress && !gameNotStarted ){
+//					roundStatus( 'start' );
+//				}
+//				else if( data.inProgress == '0' ){
+//					 function startConnection(){ return false; };
+//				}
+////				try {
+////					command = co.command || co.remoteCommand;
+////					if( typeof co.lastCommandSent !== 'undefined' ){
+////						timestamp = co.lastCommandSent;
+////					}
+////					if( typeof command !== 'undefined') {
+////						if(command === 'up' || command === 'down' || !isNaN(command)){
+////							console.log(interface + ': ' + command);
+////							successful(command);
+////						}
+////					}
+////				}
+////				catch(e){
+////					console.log('error');
+////					console.log(e.message);
+////				}
+//			},
+//			complete: function(co){
+//				setTimeout(function(){
+//					startConnection();
+//				}, 250);
+//			}
+//		});
+//	})();
+//
+//}
