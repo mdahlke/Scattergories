@@ -1,6 +1,5 @@
 <?php session_start();
 require_once( 'db.inc.php' );
-
 if( $_GET['refer'] !== 'index' ){
 	echo 'Bad refer. Fix it.';
 	exit;
@@ -13,11 +12,17 @@ try {
 		FROM game
 		WHERE code = "'. $gameCode .'"
 	')->fetch_assoc();
-	
-	echo json_encode($status);
+
+	if( $status ){
+		echo json_encode( $status );
+	}
+	else {
+		echo json_encode( array( 'error' => 'failed to retrieve value' ) );
+	}
 
 }
 catch( Exception $e ){
-	echo $e->getMessage();
+	echo json_encode( array( 'error' => $e->getMessage() ) );
 }
+
 ?>

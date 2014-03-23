@@ -6,12 +6,13 @@
 		<title>Scattergories!</title>
 		<link href="css/style.css" rel="stylesheet" type="text/css"/>
 		<link rel="shortcut icon" sizes="196x196" href="img/logo.png">
-		<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+		<script src="js/jquery-1.8.0.min.js"></script>
+		<!--<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>-->
 		<script src="js/index.js"></script>
 	</head>
 
 	<body>
-		
+
 		<section id="container">
 			<article id="joinGame" class="selectGame">
 				<button class="btn-pickIt" type='button'>Join A Game</button>
@@ -20,7 +21,7 @@
 				<button class="btn-pickIt" type='button'>Pick it</button>
 			</article>
 		</section>
-		
+
 	</body>
 
 			<?php
@@ -34,5 +35,5 @@
 			<?php
 				}
 			?>
-	
+
 </html>

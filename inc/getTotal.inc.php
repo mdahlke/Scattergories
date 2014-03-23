@@ -1,7 +1,6 @@
 <?php session_start();
 //var_dump($_SESSION['game']);
 foreach( $_SESSION['game'] as $game){
-var_dump($game);
 	foreach( $game as $round => $k ){
 		var_dump($round);
 		echo $key;
