@@ -95,7 +95,6 @@ function tallyScore( isTallying ) {
 
 
 function highlightContainer(obj) {
-    console.log($(obj));
     var oc = {
         background: $(obj).css('background'),
         color: $(obj).css('color')
@@ -108,7 +107,6 @@ function highlightContainer(obj) {
 
     var highlight = setInterval(function() {
         var c = i % 2 ? oc : hc;
-        console.log(c);
         $(obj).css(c);
         i++;
     }, 100);
@@ -134,12 +132,8 @@ $(document).ready(function() {
     $(createGameDiv).css({
         height: createGameHeight
     });
-    $(createGameButton).css({
-    });
     $(joinGameDiv).css({
         height: joinGameHeight
-    });
-    $(joinGameButton).css({
     });
  
     $(document).on('click', '#joinButton', function() {
@@ -151,8 +145,7 @@ $(document).ready(function() {
                 code: c
             }
         }).done(function(data) {
-            console.log(data);
-            d = $.parseJSON(data);
+            var d = $.parseJSON(data);
             displaySheet(d.list, d.code);
         });
 
@@ -205,9 +198,6 @@ $(document).ready(function() {
 
                 }
                 var d = $.parseJSON(data);
-
-                console.log(d);
-
                 if (nicknameDiv.html() !== d.nickname) {
                     nicknameDiv.animate({
                         opacity: 0
@@ -279,7 +269,6 @@ $(document).ready(function() {
     });
 
     $(this).on('change', '.answerLine', function() {
-        console.log('hi');
         var round = $(this).attr('data-round');
         var number = $(this).attr('data-number');
         var value = $(this).val();
@@ -451,7 +440,6 @@ function longPoll() {
                 refer: 'index'
             },
             success: function( data ) {
-                console.log( data );
                 if( data !== 'null' ) {
                     if ( parseInt( data.inProgress ) === 1 && !gameStarted) {
                         roundStatus( 'start' );

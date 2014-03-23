@@ -1,5 +1,6 @@
 html {
     border: 5px solid rgb(236, 99, 55);
+    min-width: 1300px;
 }
 body {
     position: relative;
