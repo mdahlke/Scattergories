@@ -90,12 +90,7 @@ function roundStatus(status) {
 }
 
 function tallyScore( isTallying ) {
-    if( isTallying ){
-        tallyingScore = true;
-    }
-    else {
-        tallyingScore = false;
-    }
+    tallyingScore = isTallying;
 }
 
 
@@ -116,11 +111,11 @@ function highlightContainer(obj) {
         console.log(c);
         $(obj).css(c);
         i++;
-    }, 200);
+    }, 100);
 
     setTimeout(function() {
         clearInterval(highlight);
-    }, 1000);
+    }, 750);
 
 }
 
@@ -338,14 +333,14 @@ $(document).ready(function() {
     });
 
     $(document).on('click', '#tallyScore', function() {
-        if( $(this).css('display') === 'none' ){
-            tallyScore( true );
-            $(this).slideUp( 500 );
+        if( $('#cover').css('display') === 'none' ){
+            tallyScore( false );
+            $('#cover').slideDown( 500 );
         }
         else {
-            tallyScore( false );
-            $(this).slideDown( 500 ); 
-        }
+            tallyScore( true );
+            $('#cover').slideUp( 500 ); 
+      }
     });
 
     /**
