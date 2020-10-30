@@ -1,5 +1,5 @@
 <?php
 
-$con = new mysqli('localhost', 'mdahlke', 'Rpd8749**', 'scattergories');
+$con = new mysqli('localhost', $USER, $PASS, 'scattergories');
 
 ?>
