@@ -24,16 +24,16 @@
 
 	</body>
 
-			<?php
-				if( isset($_SESSION['list']) ) {
-			?>
-			<script>
-				$(document).ready(function(){
-					displaySheet(<?= $_SESSION['list']; ?>);
-				});
-			</script>
-			<?php
-				}
-			?>
+	<?php
+		if( isset($_SESSION['list']) ) {
+	?>
+	<script>
+		$(document).ready(function(){
+			displaySheet(<?= $_SESSION['list']; ?>);
+		});
+	</script>
+	<?php
+		}
+	?>
 
 </html>
